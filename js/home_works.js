@@ -59,6 +59,12 @@ const moveBlock = () => {
     }
 };
 
+function handleMove(offset, operation, position) {
+    position += speed;
+    childBlock.style[offset] = `${position}px`;
+    requestAnimationFrame(moveBlock);
+}
+
 moveBlock()
 
 // HW2 Part2
@@ -104,3 +110,6 @@ resetBtn.addEventListener("click", () => {
     updateCounterDisplay();
     isRunning = false;
 });
+
+
+
