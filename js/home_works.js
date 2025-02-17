@@ -111,5 +111,49 @@ resetBtn.addEventListener("click", () => {
     isRunning = false;
 });
 
+//HW 3 PART 1
+fetch('../data/persons.json')
+    .then(response => response.json())
+    .then(data => {
+
+        const container = document.querySelector('.characters-list');
+        container.classList.add('characters-list');
+
+        data.forEach(person => {
+            const card = document.createElement('div');
+            card.classList.add('character-card');
 
 
+            card.innerHTML =  `
+                <div class="character-photo">
+                    <img src="${person.person_photo}" alt="${person.name}">
+                </div>
+                <h3>${person.name}</h3>
+                <p><strong>Возраст: ${person.age}</strong> </p>
+                
+            `;
+
+            container.appendChild(card);
+        });
+    })
+    .catch(error => console.error('Ошибка загрузки данных:', error));
+
+
+
+//HW 3 PART 2
+const request  = new XMLHttpRequest();
+request.open('GET', '../data/persons.json');
+
+request.onload = () => {
+    if (request.status === 200) {
+        console.log(JSON.parse(request.responseText));
+    }
+
+};
+
+request.onerror = function () {
+    console.error('Ошибка запроса');
+};
+console.log(request.responseText);
+
+request.send();
